@@ -21,6 +21,8 @@ class NewsRepository(
         private val appExecutors: AppExecutors = AppExecutors()
 ) {
 
+    val favoriteArticles = ArrayList<NewsArticles>()
+
     /**
      * Fetch the news articles from database if exist else fetch from web
      * and persist them in the database
@@ -39,4 +41,27 @@ class NewsRepository(
         }.asLiveData()
     }
 
+    fun query(word: String): LiveData<Resource<List<NewsArticles>?>> {
+        return object : NetworkBoundResource<List<NewsArticles>, NewsSource>(appExecutors) {
+            override fun saveCallResult(item: NewsSource) {
+                newsDao.insertArticles(item.articles)
+            }
+
+            override fun shouldFetch(data: List<NewsArticles>?) = true
+
+            override fun loadFromDb() = newsDao.getNewsArticles()
+
+            override fun createCall() = newsSourceService.query(word)
+        }.asLiveData()
+    }
+
+    fun favorite(articles: NewsArticles): Int {
+        favoriteArticles.add(articles)
+        return favoriteArticles.size
+    }
+
+    fun unfavorite(articles: NewsArticles): Int {
+        favoriteArticles.remove(articles)
+        return favoriteArticles.size
+    }
 }

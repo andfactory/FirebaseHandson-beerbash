@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.2'
     defaultConfig {
-        applicationId "com.andfactory.newsapp"
+        applicationId "com.akshay.newsapp"
         minSdkVersion 19
         versionCode 3
         versionName "2.8.5"
@@ -40,6 +40,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-inappmessaging-display:17.0.1'
     implementation 'com.google.firebase:firebase-core:16.0.3'
+
+    // Design
+    implementation "com.android.support:design:28.0.0-rc02"
 
     // Kotlin
     implementation kotlinLibraries.kotlin
@@ -82,5 +85,6 @@ dependencies {
     androidTestImplementation(testLibraries.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation 'com.android.support:design:28.0.0-rc02'
 }
 apply plugin: 'com.google.gms.google-services'

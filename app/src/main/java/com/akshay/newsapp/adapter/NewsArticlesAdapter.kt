@@ -1,5 +1,8 @@
 package com.akshay.newsapp.adapter
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +21,7 @@ import kotlinx.android.synthetic.main.row_news_article.view.*
  * @since 5/23/2017.
  */
 class NewsArticlesAdapter(
-        private val listener: (NewsArticles) -> Unit
+        private val listener: NewsHolder.Listener
 ) : RecyclerView.Adapter<NewsArticlesAdapter.NewsHolder>() {
 
     /**
@@ -46,10 +49,16 @@ class NewsArticlesAdapter(
      */
     class NewsHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
+        interface Listener {
+            fun onItemClick(articles: NewsArticles)
+            fun onFavoriteClick(articles: NewsArticles)
+        }
+
         /**
          * Binds the UI with the data and handles clicks
          */
-        fun bind(newsArticle: NewsArticles, listener: (NewsArticles) -> Unit) = with(itemView) {
+        fun bind(newsArticle: NewsArticles,
+                 listener: Listener) = with(itemView) {
             //news_title.text = newsArticle.title
             //news_description.text = newsArticle.description
             tvNewsItemTitle.text = newsArticle.title
@@ -64,9 +73,16 @@ class NewsArticlesAdapter(
                             .error(R.drawable.img_test_one)
                             .diskCacheStrategy(DiskCacheStrategy.ALL))
                     .into(ivNewsImage)
-            setOnClickListener { listener(newsArticle) }
+            setOnClickListener { listener.onItemClick(newsArticle) }
+            favorite_button.setOnClickListener {
+                if (!newsArticle.favorite) {
+                    it.background = context.resources.getDrawable(R.drawable.selector_favorite_button, null)
+                } else {
+                    it.background = context.resources.getDrawable(R.drawable.selector_no_favorite_button, null)
+                }
+                listener.onFavoriteClick(newsArticle)
+            }
         }
-
     }
 
     /**

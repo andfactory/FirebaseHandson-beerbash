@@ -1,4 +1,4 @@
-package com.akshay.newsapp.ui
+package com.akshay.newsapp.ui.top
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -12,16 +12,16 @@ import com.akshay.newsapp.repo.NewsRepository
 /**
  * A container for [NewsArticles] related data to show on the UI.
  */
-class NewsArticleViewModel(application: Application) : AndroidViewModel(application) {
+class TopViewModel(application: Application) : AndroidViewModel(application) {
 
     private var newsArticles: LiveData<Resource<List<NewsArticles>?>>
+    private val newsRepository: NewsRepository = NewsRepository(
+            DatabaseCreator.database(application).newsArticlesDao(),
+            NewsSourceService.getNewsSourceService()
+    )
 
     init {
         // TODO: Inject repository using DI.
-        val newsRepository = NewsRepository(
-                DatabaseCreator.database(application).newsArticlesDao(),
-                NewsSourceService.getNewsSourceService()
-        )
         newsArticles = newsRepository.getNewsArticles()
     }
 
@@ -29,4 +29,12 @@ class NewsArticleViewModel(application: Application) : AndroidViewModel(applicat
      * Return news articles to observe on the UI.
      */
     fun getNewsArticles() = newsArticles
+
+    fun favorite(articles: NewsArticles): Int {
+        return newsRepository.favorite(articles)
+    }
+
+    fun unfavorite(articles: NewsArticles): Int {
+        return newsRepository.unfavorite(articles)
+    }
 }
