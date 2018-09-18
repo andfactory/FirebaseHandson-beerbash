@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FirebaseHandson-beerbash.iml" filepath="$PROJECT_DIR$/FirebaseHandson-beerbash.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/goal/goal.iml" filepath="$PROJECT_DIR$/goal/goal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/start/start.iml" filepath="$PROJECT_DIR$/start/start.iml" />
     </modules>
   </component>
 </project>
