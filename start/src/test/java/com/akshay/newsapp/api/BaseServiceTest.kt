@@ -1,4 +1,4 @@
-package com.akshay.newsapp.api
+package com.andfactory.newsapp.api
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import okhttp3.mockwebserver.MockResponse
@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets
 import java.util.*
 
 /**
- * @author Akshay Chordiya
+ * @author andfactory Chordiya
  * @since 08/11/2017.
  * @version 1.0
  */

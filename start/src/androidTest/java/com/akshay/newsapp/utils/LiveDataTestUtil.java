@@ -1,4 +1,4 @@
-package com.akshay.newsapp.utils;
+package com.andfactory.newsapp.utils;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;

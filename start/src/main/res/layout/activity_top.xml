@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.akshay.newsapp.ui.top.TopActivity"
+    tools:context="com.andfactory.newsapp.ui.top.TopActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
@@ -29,7 +29,7 @@
                 app:queryHint="検索ワードを入力してください" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
-    <com.akshay.newsapp.widget.CompleteRecyclerView
+    <com.andfactory.newsapp.widget.CompleteRecyclerView
         android:id="@+id/news_list"
         android:layout_width="0dp"
         android:layout_height="0dp"

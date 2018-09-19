@@ -1,9 +1,9 @@
-package com.akshay.newsapp.db
+package com.andfactory.newsapp.db
 
 import androidx.test.runner.AndroidJUnit4
-import com.akshay.newsapp.model.NewsArticles
-import com.akshay.newsapp.utils.LiveDataTestUtil
-import com.akshay.newsapp.utils.TestDataUtils
+import com.andfactory.newsapp.model.NewsArticles
+import com.andfactory.newsapp.utils.LiveDataTestUtil
+import com.andfactory.newsapp.utils.TestDataUtils
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 
 /**
  *
- * @author Akshay Chordiya
+ * @author andfactory Chordiya
  * @since 08/11/2017.
  * @version 1.0
  */

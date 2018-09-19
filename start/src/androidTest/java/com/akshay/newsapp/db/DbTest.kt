@@ -1,4 +1,4 @@
-package com.akshay.newsapp.db
+package com.andfactory.newsapp.db
 
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
@@ -8,7 +8,7 @@ import org.junit.Before
 
 /**
  *
- * @author Akshay Chordiya
+ * @author andfactory Chordiya
  * @since 08/11/2017.
  * @version 1.0
  */

@@ -1,9 +1,9 @@
-package com.akshay.newsapp.utils
+package com.andfactory.newsapp.utils
 
-import com.akshay.newsapp.model.NewsArticles
+import com.andfactory.newsapp.model.NewsArticles
 
 /**
- * @author Akshay Chordiya
+ * @author andfactory Chordiya
  * @version 1.0
  * @since 08/11/2017.
  */

@@ -1,8 +1,8 @@
-package com.akshay.newsapp.api
+package com.andfactory.newsapp.api
 
-import com.akshay.newsapp.utils.LiveDataCallAdapterFactory
-import com.akshay.newsapp.utils.LiveDataTestUtil
-import com.akshay.newsapp.utils.create
+import com.andfactory.newsapp.utils.LiveDataCallAdapterFactory
+import com.andfactory.newsapp.utils.LiveDataTestUtil
+import com.andfactory.newsapp.utils.create
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
@@ -16,7 +16,7 @@ import java.io.IOException
 
 /**
  *
- * @author Akshay
+ * @author andfactory
  * @since 08/11/2017.
  * @version 1.0
  */
@@ -59,7 +59,7 @@ class NewsSourceServiceTest : BaseServiceTest() {
         val article1 = articles?.get(0)
         assertThat(article1, notNullValue())
         if (article1 != null) {
-            assertThat(article1.author, `is`("Akshay"))
+            assertThat(article1.author, `is`("andfactory"))
             assertThat(article1.title, `is`("Google Pixel 2"))
             assertThat(article1.description, `is`("Gift me Google Pixel 2 ;)"))
         }
