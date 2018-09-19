@@ -1,5 +1,6 @@
 package com.andfactory.newsapp.ui.summary
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,7 +9,6 @@ import com.andfactory.newsapp.R
 import com.andfactory.newsapp.adapter.NewsArticlesAdapter
 import com.andfactory.newsapp.model.NewsArticles
 import com.andfactory.newsapp.ui.top.SummaryViewModel
-import com.andfactory.newsapp.ui.top.TopViewModel
 import com.andfactory.newsapp.utils.getViewModel
 import com.andfactory.newsapp.utils.load
 import com.andfactory.newsapp.utils.observe
@@ -19,8 +19,18 @@ import kotlinx.android.synthetic.main.empty_layout.*
 import kotlinx.android.synthetic.main.progress_layout.*
 
 class SummaryActivity : AppCompatActivity() {
+
     private val summaryViewModel by lazy { getViewModel<SummaryViewModel>() }
     private lateinit var fibaseAnalytics: FirebaseAnalytics
+
+    companion object {
+        private const val KEY_QUERY_TEXT = "query_text"
+        fun start(context: Context, queryText: String) {
+            val intent = Intent(context, SummaryActivity::class.java)
+            intent.putExtra(KEY_QUERY_TEXT, queryText)
+            context.startActivity(intent)
+        }
+    }
 
     /**
      * Starting point of the activity
@@ -33,9 +43,9 @@ class SummaryActivity : AppCompatActivity() {
 
         val queryText = if (intent.data != null) {
             val uri = intent.data
-            uri.getQueryParameter("query_text")
+            uri.getQueryParameter(KEY_QUERY_TEXT)
         } else {
-            intent.getStringExtra("query")
+            intent.getStringExtra(KEY_QUERY_TEXT)
         }
 
         summaryViewModel.query(queryText)

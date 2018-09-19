@@ -56,9 +56,7 @@ class TopActivity : AppCompatActivity() {
         val searchPlateEditText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
         searchPlateEditText.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val intent = Intent(this@TopActivity, SummaryActivity::class.java)
-                intent.putExtra("query", searchView.query.toString())
-                startActivity(intent)
+                SummaryActivity.start(this, searchView.query.toString())
                 true
             }
             false

@@ -9,11 +9,9 @@ import com.andfactory.newsapp.R
 import com.andfactory.newsapp.adapter.NewsArticlesAdapter
 import com.andfactory.newsapp.model.NewsArticles
 import com.andfactory.newsapp.ui.top.SummaryViewModel
-import com.andfactory.newsapp.ui.top.TopViewModel
 import com.andfactory.newsapp.utils.getViewModel
 import com.andfactory.newsapp.utils.load
 import com.andfactory.newsapp.utils.observe
-import com.andfactory.newsapp.utils.toast
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_summary.*
 import kotlinx.android.synthetic.main.empty_layout.*
@@ -25,7 +23,7 @@ class SummaryActivity : AppCompatActivity() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     companion object {
-        private const val KEY_QUERY_TEXT = "KEY_QUERY_TEXT"
+        private const val KEY_QUERY_TEXT = "query_text"
         fun start(context: Context, queryText: String) {
             val intent = Intent(context, SummaryActivity::class.java)
             intent.putExtra(KEY_QUERY_TEXT, queryText)
@@ -42,8 +40,12 @@ class SummaryActivity : AppCompatActivity() {
 
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        val queryText = intent.getStringExtra(KEY_QUERY_TEXT)
-        summaryViewModel.query(queryText)
+        val queryText = if (intent.data != null) {
+            val uri = intent.data
+            uri.getQueryParameter(KEY_QUERY_TEXT)
+        } else {
+            intent.getStringExtra(KEY_QUERY_TEXT)
+        }
 
         supportActionBar?.let {
             title = queryText
