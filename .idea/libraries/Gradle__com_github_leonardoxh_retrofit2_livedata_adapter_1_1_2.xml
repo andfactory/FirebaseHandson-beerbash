@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.leonardoxh:retrofit2-livedata-adapter-1.1.2">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/retrofit2-livedata-adapter-1.1.2.aar/f0a005b36852124c8536146951c31e55/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/retrofit2-livedata-adapter-1.1.2.aar/f0a005b36852124c8536146951c31e55/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.leonardoxh/retrofit2-livedata-adapter/1.1.2/91af639830926dac66a0662bc28ee6ac6b307e76/retrofit2-livedata-adapter-1.1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
