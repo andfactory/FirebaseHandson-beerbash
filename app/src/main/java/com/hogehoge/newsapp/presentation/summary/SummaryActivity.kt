@@ -9,12 +9,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.View
 import com.hogehoge.newsapp.R
 import com.hogehoge.newsapp.databinding.ActivitySummaryBinding
 import com.hogehoge.newsapp.model.NewsArticles
 import com.hogehoge.newsapp.presentation.common.NewsAdapter
 import com.hogehoge.newsapp.util.extension.getViewModel
+import com.hogehoge.newsapp.util.extension.gone
+import com.hogehoge.newsapp.util.extension.visible
 
 class SummaryActivity : AppCompatActivity(), SummaryNavigator {
 
@@ -23,7 +24,7 @@ class SummaryActivity : AppCompatActivity(), SummaryNavigator {
         DataBindingUtil.setContentView<ActivitySummaryBinding>(this, R.layout.activity_summary)
     }
 
-    private lateinit var queryText: String
+    private lateinit var queryWord: String
 
     companion object {
         private const val KEY_QUERY_TEXT = "query_text"
@@ -39,16 +40,21 @@ class SummaryActivity : AppCompatActivity(), SummaryNavigator {
         lifecycle.addObserver(viewModel)
         viewModel.navigator = this
 
-        queryText = intent.getStringExtra(KEY_QUERY_TEXT)
-        viewModel.queryWord = queryText
+        queryWord = if (intent.data != null) {
+            intent.data.getQueryParameter(KEY_QUERY_TEXT)
+        } else {
+            intent.getStringExtra(KEY_QUERY_TEXT)
+        }
+
+        viewModel.queryWord = queryWord
         supportActionBar?.let {
-            title = queryText
+            title = queryWord
         }
 
         viewModel.item.observe(this, Observer {
             if (it == null || it.size == 0) {
-                binding.emptyView?.visibility = View.VISIBLE
-                binding.progress?.visibility = View.GONE
+                binding.emptyView?.visible()
+                binding.progress?.gone()
             } else {
                 binding.newsList.apply {
                     val listener = object : NewsAdapter.Listener {
@@ -63,13 +69,13 @@ class SummaryActivity : AppCompatActivity(), SummaryNavigator {
                     adapter = NewsAdapter(context, it, listener)
                     layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 }
-                binding.progress?.visibility = View.GONE
+                binding.progress?.gone()
             }
         })
     }
 
     override fun onError() {
-        binding.progress?.visibility = View.GONE
-        binding.emptyView?.visibility = View.VISIBLE
+        binding.progress?.gone()
+        binding.emptyView?.visible()
     }
 }

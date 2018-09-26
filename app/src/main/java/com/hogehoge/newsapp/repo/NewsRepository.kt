@@ -8,13 +8,14 @@ import io.reactivex.Single
 class NewsRepository {
 
     private val favoriteArticles = ArrayList<NewsArticles>()
+    private val api = NewsSourceApi.getNewsSourceService()
 
     fun fetchAllData(): Single<NewsSource> {
-        return NewsSourceApi.getNewsSourceService().getNewsSource()
+        return api.getNewsSource()
     }
 
     fun query(word: String): Single<NewsSource> {
-        return NewsSourceApi.getNewsSourceService().query(word)
+        return api.query(word)
     }
 
     fun favorite(articles: NewsArticles): Int {

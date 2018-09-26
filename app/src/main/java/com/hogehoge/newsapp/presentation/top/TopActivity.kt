@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
@@ -20,6 +19,8 @@ import com.hogehoge.newsapp.model.NewsArticles
 import com.hogehoge.newsapp.presentation.common.NewsAdapter
 import com.hogehoge.newsapp.presentation.summary.SummaryActivity
 import com.hogehoge.newsapp.util.extension.getViewModel
+import com.hogehoge.newsapp.util.extension.gone
+import com.hogehoge.newsapp.util.extension.visible
 
 class TopActivity : AppCompatActivity(), TopNavigator {
 
@@ -27,11 +28,6 @@ class TopActivity : AppCompatActivity(), TopNavigator {
 
     private val binding: ActivityTopBinding by lazy {
         DataBindingUtil.setContentView<ActivityTopBinding>(this, R.layout.activity_top)
-    }
-
-    companion object {
-        private const val FIREBASE_EVENT_REQUEST_REVIEW = "request_review"
-        private const val FIREBASE_EVENT_SUGGEST_ARTICLES = "suggest_article"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,8 +39,8 @@ class TopActivity : AppCompatActivity(), TopNavigator {
 
         viewModel.item.observe(this, Observer {
             if (it == null || it.size == 0) {
-                binding.emptyView?.visibility = View.VISIBLE
-                binding.progress?.visibility = View.GONE
+                binding.emptyView?.visible()
+                binding.progress?.gone()
             } else {
                 binding.newsList.apply {
                     val listener = object : NewsAdapter.Listener {
@@ -66,14 +62,14 @@ class TopActivity : AppCompatActivity(), TopNavigator {
                     adapter = NewsAdapter(context, it, listener)
                     layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 }
-                binding.progress?.visibility = View.GONE
+                binding.progress?.gone()
             }
         })
     }
 
     override fun onError() {
-        binding.progress?.visibility = View.GONE
-        binding.emptyView?.visibility = View.VISIBLE
+        binding.progress?.gone()
+        binding.emptyView?.visible()
     }
 
     private fun setUpSearchView() {
